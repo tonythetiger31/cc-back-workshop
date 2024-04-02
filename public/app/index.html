@@ -1,12 +1,13 @@
 <h1>this is my front end</h1>
-<h1 id="response">response goes here</h1>
+<h1 id="response">loading ...</h1>
 
 <script>
-	async function sendAMessage() {
+	async function callServer() {
 		var data = await fetch("/")
 		var body = await data.json()
 		document.getElementById("response").innerHTML = body.count
 	}
+
 	callServer()
 
 </script>

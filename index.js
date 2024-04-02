@@ -18,15 +18,18 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
 	counter++;
-	res.json({ count: counter.toString() });
+	res.status(200).send({ count: counter});
 });
 
 app.post('/messages', (req, res) => {
 	messages.push(req.body.msg)
-	res.send(messages)
+	res.status(200).send(messages)
 });
 app.get('/messages', (req, res) => {
-	res.send(messages)
+	res.status(200).send(messages)
+})
+app.get('/*', (req, res) => {
+	res.status(404).send('404 not found')
 })
 
 app.listen(8080);
