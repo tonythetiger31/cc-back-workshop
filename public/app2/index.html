@@ -1,0 +1,26 @@
+<h1>messaging app</h1>
+<h1 id="messages">Loading Messages...</h1>
+<input id="input" onchange="sendMessage()">
+<button onclick="loadMessages()">load messages</button>
+<script>
+	async function sendMessage() {
+		var msg = document.getElementById("input").value
+
+		res = await fetch("/messages", {
+			"method": "POST",
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			"body": JSON.stringify({msg})
+		});
+		body = await res.json()
+		document.getElementById('input').value = ""
+		document.getElementById("messages").innerHTML = body	
+	}
+	async function loadMessages() {
+		res = await fetch("/messages")
+		body = await res.json()
+		document.getElementById("messages").innerHTML = body
+	}
+	loadMessages()
+</script>
